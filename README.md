@@ -1,4 +1,4 @@
-# Yamanote Line Train Dynamics Model
+Yamanote Line Train Dynamics Model
 
 A first-principles physics simulation of the JR East Yamanote Line, compared
 against the published timetable.
@@ -398,5 +398,6 @@ Outstanding:
    from a measurement.
 4. Speed-dependent braking in the segment solver, which would allow the
    high-speed classes to be simulated.
-#   y a m a n o t e - d y n a m i c s  
+  y a m a n o t e - d y n a m i c s 
+ 
  
