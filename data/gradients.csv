@@ -1,0 +1,37 @@
+# Average per-segment gradient, DERIVED, not published.
+# elevation_* are ground elevations at the station coordinate
+# from a public terrain model (open-elevation.com), NOT track
+# level. grade_permille is the segment AVERAGE over the published
+# kilometrage; real track has steeper local grades.
+# Positive grade = uphill in the outer-loop direction.
+from_station,to_station,elevation_from_m,elevation_to_m,rise_m,distance_m,grade_permille
+Shinagawa,Osaki,10.0,6.0,-4.0,2000.0,-2.0
+Osaki,Gotanda,6.0,15.0,9.0,900.0,10.0
+Gotanda,Meguro,15.0,39.0,24.0,1200.0,20.0
+Meguro,Ebisu,39.0,37.0,-2.0,1500.0,-1.33
+Ebisu,Shibuya,37.0,40.0,3.0,1600.0,1.88
+Shibuya,Harajuku,40.0,39.0,-1.0,1200.0,-0.83
+Harajuku,Yoyogi,39.0,53.0,14.0,1500.0,9.33
+Yoyogi,Shinjuku,53.0,56.0,3.0,700.0,4.29
+Shinjuku,Shin-Okubo,56.0,38.0,-18.0,1300.0,-13.85
+Shin-Okubo,Takadanobaba,38.0,34.0,-4.0,1400.0,-2.86
+Takadanobaba,Mejiro,34.0,34.0,0.0,900.0,0.0
+Mejiro,Ikebukuro,34.0,47.0,13.0,1200.0,10.83
+Ikebukuro,Otsuka,47.0,34.0,-13.0,1800.0,-7.22
+Otsuka,Sugamo,34.0,33.0,-1.0,1100.0,-0.91
+Sugamo,Komagome,33.0,30.0,-3.0,700.0,-4.29
+Komagome,Tabata,30.0,28.0,-2.0,1600.0,-1.25
+Tabata,Nishi-Nippori,28.0,13.0,-15.0,800.0,-18.75
+Nishi-Nippori,Nippori,13.0,20.0,7.0,500.0,14.0
+Nippori,Uguisudani,20.0,15.0,-5.0,1100.0,-4.55
+Uguisudani,Ueno,15.0,19.0,4.0,1100.0,3.64
+Ueno,Okachimachi,19.0,12.0,-7.0,600.0,-11.67
+Okachimachi,Akihabara,12.0,11.0,-1.0,1000.0,-1.0
+Akihabara,Kanda,11.0,16.0,5.0,700.0,7.14
+Kanda,Tokyo,16.0,19.0,3.0,1300.0,2.31
+Tokyo,Yurakucho,19.0,19.0,0.0,800.0,0.0
+Yurakucho,Shimbashi,19.0,18.0,-1.0,1100.0,-0.91
+Shimbashi,Hamamatsucho,18.0,11.0,-7.0,1200.0,-5.83
+Hamamatsucho,Tamachi,11.0,8.0,-3.0,1500.0,-2.0
+Tamachi,Takanawa Gateway,8.0,5.0,-3.0,1300.0,-2.31
+Takanawa Gateway,Shinagawa,5.0,10.0,5.0,900.0,5.56

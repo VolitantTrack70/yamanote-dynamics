@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tokyoline"
+version = "0.1.0"
+description = "First-principles train dynamics for the Yamanote Line, validated against the published timetable"
+requires-python = ">=3.10"
+# scipy is deliberately absent. The spec anticipated needing it for integration
+# and root-finding, but the physics core ended up not using it: the RK4 step is
+# hand-rolled so control-phase switching stays explicit, the braking solution is
+# closed-form, and the brake-application point is found by bisection. Declaring
+# an unused dependency misstates what the project needs to run.
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# The GUI needs these. `pip install -e ".[viz]"` to get them.
+viz = ["plotly>=5.18", "streamlit>=1.30"]
+# Optional: run the GUI in a native desktop window instead of a browser tab.
+app = ["plotly>=5.18", "streamlit>=1.30", "pywebview>=4.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,94 @@
+{
+  "_comment": [
+    "External reference points for the energy model's weakest inputs.",
+    "",
+    "The energy chapter flagged regeneration receptivity as the least defensible",
+    "number in the project: it swings net circuit consumption by nearly a factor",
+    "of three and is not something the model can derive. These figures are the",
+    "closest published anchors found.",
+    "",
+    "IMPORTANT CAVEAT ON ALL OF THEM: JR East blocks automated retrieval of its",
+    "own PDFs (HTTP 403), so these numbers reach this file through secondary",
+    "summaries of JR East material rather than from the primary document. The",
+    "figures themselves are attributed to JR East, but the DEFINITIONS could not",
+    "be confirmed at source. That matters enormously for a ratio -- see below."
+  ],
+
+  "regeneration_rate": {
+    "quantity_ja": "回生率",
+    "series": "E235-0",
+    "line": "Yamanote",
+    "operator": "JR East",
+    "values_percent": {
+      "all_day_average": 59.0,
+      "commuter_peak": 59.0,
+      "daytime": 59.2,
+      "late_night_early_morning": 57.9
+    },
+    "predecessor_comparison": {
+      "series": "E231",
+      "value_percent": 47.0,
+      "note": "The E235 is reported as more than 10 points better than the class it replaced."
+    },
+    "status": "published_definition_unverified",
+    "definition_problem": [
+      "回生率 is a ratio, and which ratio was not confirmable. Plausible readings:",
+      "  (a) regenerated energy / traction (力行) energy",
+      "  (b) regenerated energy / total energy consumed",
+      "  (c) regenerated energy / energy available at the brakes",
+      "These give materially different numbers from the same physical situation.",
+      "Reading (a) is assumed below because it is the most common convention in",
+      "Japanese traction-energy reporting, but that assumption is NOT verified.",
+      "",
+      "Consequence: this figure is used as a CROSS-CHECK, never as a model input.",
+      "The default receptivity in energy.py is unchanged by it."
+    ],
+    "cross_check": {
+      "model_regenerated_over_traction_percent": 54.7,
+      "model_receptivity_assumed": 0.70,
+      "receptivity_implied_by_59_percent": 0.76,
+      "note": [
+        "Under reading (a) the model's 54.7 percent sits close to the published",
+        "59 percent, and matching it exactly would require receptivity around",
+        "0.76 against the 0.70 guessed from first principles. That is agreement",
+        "to within about 8 percent on a parameter that was otherwise a pure",
+        "assumption -- reassuring, but conditional on a definition that could",
+        "not be checked."
+      ]
+    }
+  },
+
+  "regeneration_squeeze": {
+    "quantity_ja": "回生絞り込み / 回生失効",
+    "description": [
+      "When line voltage rises because no nearby train is drawing current, the",
+      "supply suppresses regeneration to protect equipment, and the energy is",
+      "lost. This is the physical mechanism behind the receptivity parameter.",
+      "JR East reports investigating reduced substation reference feeding voltage",
+      "specifically to make squeeze less likely."
+    ],
+    "status": "published_qualitative",
+    "relevance": "Confirms that receptivity is a real operational variable rather than a modelling convenience, and that it is not fixed -- the operator actively works to raise it."
+  },
+
+  "optimal_driving_savings": {
+    "quantity": "energy saving from optimal driving technique",
+    "line": "Yamanote",
+    "values_percent": [12.0, 15.7],
+    "status": "published_baseline_unverified",
+    "note": [
+      "Reported for the Yamanote Line. The BASELINE is not stated in the source",
+      "consulted -- presumably conventional driving at the same run time, but",
+      "that is not confirmed.",
+      "",
+      "Comparison with this project's Phase 6: coasting beats cruising slower by",
+      "2-4 percent at equal run time. That is a narrower question than 'optimal",
+      "driving technique', which would also cover avoiding unnecessary",
+      "acceleration, smoother speed holding, and consistency between drivers.",
+      "The gap between 2-4 percent and 12-15.7 percent is therefore not",
+      "necessarily a contradiction -- but it is a signal that the four-phase",
+      "coast-onset optimisation captures only part of what real driving-advice",
+      "systems achieve."
+    ]
+  }
+}

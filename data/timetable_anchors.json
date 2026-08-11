@@ -1,0 +1,68 @@
+{
+  "_comment": [
+    "Yamanote Line timetable reference points.",
+    "",
+    "CRITICAL LIMITATION, read before using any of this:",
+    "Japanese public timetables are published at MINUTE resolution. Second-level",
+    "running times (運転時刻表) are internal operating documents and are not public.",
+    "A typical Yamanote segment is about 2 minutes, so per-segment scheduled times",
+    "carry +/- 30 s of quantization -- roughly +/- 25 percent. The recovery margin",
+    "this project sets out to measure is a few percent. Per-segment comparison is",
+    "therefore dominated by rounding, not by the physics.",
+    "",
+    "Consequence for the validation: the primary metric is CUMULATIVE time around",
+    "the loop, where quantization stays bounded at +/- 30 s while the signal grows",
+    "to tens of minutes, plus the full-loop closure figures below, which are",
+    "published precisely. Per-segment results are still reported but must be",
+    "labelled quantization-limited."
+  ],
+
+  "loop_times": {
+    "_note": "Full-circuit times. These are the highest-quality validation targets available and are quoted to the second.",
+    "inner_loop_mean_s": {
+      "value": 3948,
+      "human": "65 min 48 s",
+      "status": "published",
+      "basis": "Mean over all inner-loop (内回り) services."
+    },
+    "outer_loop_mean_s": {
+      "value": 3937,
+      "human": "65 min 37 s",
+      "status": "published",
+      "basis": "Mean over all outer-loop (外回り) services."
+    },
+    "fastest_circuit_s": {
+      "value": 3840,
+      "human": "64 min 00 s",
+      "status": "published",
+      "note": "The least-padded service. The gap between this and the mean is a direct measurement of scheduling slack variation."
+    },
+    "slowest_circuit_s": {
+      "value": 4200,
+      "human": "70 min 00 s",
+      "status": "published"
+    }
+  },
+
+  "dwell_time_s": {
+    "value": null,
+    "status": "unknown",
+    "note": "Not published in any form. Must be treated as a fitted parameter, not an assumption. Loop time = sum(run) + sum(dwell) is one equation in two unknowns (dwell and recovery margin); they are NOT separately identifiable from the mean loop time alone. Report the identifiable combination and the trade-off curve. Do not silently assume a value."
+  },
+
+  "per_segment_scheduled": {
+    "status": "not_yet_sourced",
+    "note": "Minute-resolution per-segment times are widely republished but the sources checked so far disagree with each other and appear column-shifted. Nothing committed here until a source can be cross-checked against the published cumulative loop time. Absence is preferable to a table that looks authoritative and is wrong."
+  },
+
+  "line_speed_limit_kmh": {
+    "value": 90,
+    "status": "published",
+    "note": "Line-wide maximum. Per-segment restrictions from curves, turnouts and signalling are NOT public and are not modelled. This is a named limitation, and part of what the measured bias absorbs."
+  },
+
+  "gradient": {
+    "status": "not_modelled",
+    "note": "The Yamanote is close to flat and per-segment gradient data is not public at usable precision. Grade resistance is implemented in the physics core for correctness and generality, then evaluated at zero here. This was the deciding factor in choosing this line."
+  }
+}

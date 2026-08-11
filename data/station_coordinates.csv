@@ -1,0 +1,36 @@
+# Station coordinates from OpenStreetMap via the Overpass API.
+# Fetched programmatically, not transcribed. Order matches
+# yamanote_stations.csv (outer loop from Shinagawa).
+# Used for the line map ONLY. Distances come from published
+# kilometrage, never from these coordinates -- see data.py.
+name_en,name_ja,lat,lon,osm_operator
+Shinagawa,品川,35.628697,139.739129,東日本旅客鉄道
+Osaki,大崎,35.61939,139.728487,東日本旅客鉄道;東京臨海高速鉄道
+Gotanda,五反田,35.626256,139.72363,東日本旅客鉄道
+Meguro,目黒,35.634067,139.715733,東日本旅客鉄道
+Ebisu,恵比寿,35.646441,139.710208,東日本旅客鉄道
+Shibuya,渋谷,35.65808,139.701765,東日本旅客鉄道
+Harajuku,原宿,35.670215,139.702427,東日本旅客鉄道
+Yoyogi,代々木,35.683951,139.702081,東日本旅客鉄道
+Shinjuku,新宿,35.690262,139.700514,東日本旅客鉄道;JR東日本
+Shin-Okubo,新大久保,35.701301,139.700242,東日本旅客鉄道
+Takadanobaba,高田馬場,35.712684,139.703643,東日本旅客鉄道
+Mejiro,目白,35.721192,139.706465,東日本旅客鉄道
+Ikebukuro,池袋,35.730185,139.711151,東日本旅客鉄道
+Otsuka,大塚,35.731685,139.728588,東日本旅客鉄道
+Sugamo,巣鴨,35.733412,139.739427,東日本旅客鉄道
+Komagome,駒込,35.736585,139.747241,東日本旅客鉄道
+Tabata,田端,35.737372,139.761707,東日本旅客鉄道
+Nishi-Nippori,西日暮里,35.732202,139.766668,東日本旅客鉄道
+Nippori,日暮里,35.72815,139.770658,東日本旅客鉄道
+Uguisudani,鶯谷,35.721703,139.777917,東日本旅客鉄道
+Ueno,上野,35.713413,139.776542,東日本旅客鉄道
+Okachimachi,御徒町,35.706953,139.77463,東日本旅客鉄道
+Akihabara,秋葉原,35.698361,139.773122,東日本旅客鉄道
+Kanda,神田,35.691794,139.770911,東日本旅客鉄道
+Tokyo,東京,35.681255,139.766706,東日本旅客鉄道
+Yurakucho,有楽町,35.67496,139.763048,東日本旅客鉄道
+Shimbashi,新橋,35.666169,139.758221,東日本旅客鉄道
+Hamamatsucho,浜松町,35.655111,139.757062,東日本旅客鉄道
+Tamachi,田町,35.645736,139.747683,東日本旅客鉄道
+Takanawa Gateway,高輪ゲートウェイ,35.635399,139.740664,東日本旅客鉄道
