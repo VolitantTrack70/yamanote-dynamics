@@ -1,0 +1,123 @@
+{
+  "_comment": [
+    "Rolling stock parameters. Every entry carries a `status` field:",
+    "  published  - stated directly by the operator or a reference compilation",
+    "  derived    - computed from published values by an explicit formula",
+    "  modelled   - not publicly available at usable precision; estimated, basis given",
+    "This tagging is load-bearing for the README. Do not add a parameter without it."
+  ],
+  "E235-0": {
+    "designation": "JR East E235 series, 0 subseries (Yamanote Line)",
+    "operator": "JR East",
+    "line": "Yamanote",
+
+    "formation": {
+      "value": "6M5T",
+      "n_cars": 11,
+      "n_motor_cars": 6,
+      "n_trailer_cars": 5,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車"
+    },
+    "tare_mass_t": {
+      "value": 340.8,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車 (編成重量)",
+      "note": "Tare (empty). Loaded mass is computed separately from capacity and a per-passenger mass assumption."
+    },
+    "capacity_passengers": {
+      "value": 1724,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車 (編成定員)",
+      "conflict": "en.wikipedia gives 1628 for the same formation. JA figure used; discrepancy recorded, not resolved."
+    },
+    "passenger_mass_kg": {
+      "value": 60.0,
+      "status": "modelled",
+      "basis": "Conventional Japanese rolling stock design figure for AW loading calculations."
+    },
+
+    "traction_motor": {
+      "type": "MT79",
+      "description": "Toshiba totally-enclosed fan-cooled 3-phase AC induction motor",
+      "one_hour_rating_kw": {
+        "value": 140.0,
+        "status": "published",
+        "source": "ja.wikipedia JR東日本E235系電車"
+      },
+      "motors_per_motor_car": {
+        "value": 4,
+        "status": "published",
+        "source": "ja.wikipedia JR東日本E235系電車"
+      },
+      "gear_ratio": {
+        "value": 7.07,
+        "status": "published",
+        "source": "ja.wikipedia JR東日本E235系電車 (1:7.07, 99:14)"
+      }
+    },
+    "total_power_kw": {
+      "value": 3360.0,
+      "status": "derived",
+      "formula": "6 motor cars x 4 motors x 140 kW",
+      "note": "One-hour rating, not continuous rating. Continuous rating is not published; using the one-hour figure makes the model marginally optimistic in the constant-power region."
+    },
+
+    "max_operating_speed_kmh": {
+      "value": 90.0,
+      "status": "published",
+      "source": "ja.wikipedia; matches the Yamanote Line speed limit",
+      "note": "Line limit and stock limit coincide here. Design maximum is 120 km/h."
+    },
+    "design_max_speed_kmh": {
+      "value": 120.0,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車"
+    },
+    "starting_acceleration_kmh_s": {
+      "value": 3.0,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車 (起動加速度)",
+      "note": "Net acceleration achieved at start, i.e. already includes running resistance at v=0. Load condition for this figure is not stated; assumed AW2."
+    },
+    "service_deceleration_kmh_s": {
+      "value": 4.2,
+      "status": "published",
+      "source": "ja.wikipedia JR東日本E235系電車 (減速度)",
+      "note": "This is the maximum service brake rate (常用最大). Normal station approaches use less. Modelling every stop at 4.2 gives a genuine lower bound on run time, which is what the validation wants."
+    },
+    "regenerative_braking": {
+      "value": true,
+      "status": "published",
+      "source": "ja.wikipedia (回生ブレーキ併用電気指令式ブレーキ)"
+    },
+
+    "car_length_end_mm": {"value": 19570, "status": "published", "source": "ja.wikipedia"},
+    "car_length_intermediate_mm": {"value": 19500, "status": "published", "source": "ja.wikipedia"},
+    "body_width_mm": {"value": 2950, "status": "published", "source": "ja.wikipedia"},
+    "body_height_mm": {
+      "value": 3620,
+      "status": "published",
+      "source": "en.wikipedia E235 series",
+      "note": "Height above rail, used only to estimate frontal area."
+    },
+
+    "rotational_inertia_lambda": {
+      "value": 0.08,
+      "status": "modelled",
+      "basis": "Standard range for an EMU is 0.06-0.10; 0.08 taken as midpoint. Not published for this class. Effective mass = m * (1 + lambda). Omitting this term would make the train roughly 8 percent too quick.",
+      "sensitivity": "Sweep 0.06-0.10 and report the run-time spread in the README."
+    },
+    "adhesive_mass_fraction": {
+      "value": 0.545,
+      "status": "modelled",
+      "basis": "6 of 11 cars are powered (6/11 = 0.545). Assumes uniform mass per car, which is not exactly true since motor cars are heavier. This makes the adhesion ceiling a conservative (low) estimate.",
+      "note": "With 24 powered axles the adhesion limit does not bind for this class under normal conditions. Included for correctness and for the fleet comparison, where it does bind for locomotive-hauled stock."
+    },
+    "davis_coefficients": {
+      "status": "modelled",
+      "basis": "Published Davis coefficients for the E235 are not available. Japanese operators use per-class coefficient sets that are not released. Values here are estimated from mass, car count and frontal area. See resistance.py for the estimator and its assumptions.",
+      "warning": "This is the single largest modelled uncertainty in the physics core. Treat any run-time agreement as conditional on it."
+    }
+  }
+}

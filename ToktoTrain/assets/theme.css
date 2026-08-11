@@ -1,0 +1,266 @@
+/* Yamanote model — application chrome.
+ *
+ * Light, paper-like, and deliberately restrained. Colour appears only where it
+ * carries meaning: the route line, a status badge, a reference line on a chart.
+ * Large flat areas stay white or near-white so the numbers are what stand out.
+ *
+ * Selectors use data-testid where possible, the most stable hook Streamlit
+ * exposes. Class-name selectors would break on every minor release.
+ */
+
+:root {
+  --line: #7CB342;          /* route green, darkened for legibility on white */
+  --line-bright: #9ACD32;   /* the line's actual uguisu, for the route only */
+  --bg: #FFFFFF;
+  --panel: #F6F8F9;
+  --panel-2: #EDF1F3;
+  --edge: #DFE5EA;
+  --edge-strong: #C7D0D7;
+  --text: #1A2027;
+  --muted: #5B6B7A;
+  --blue: #1565C0;
+  --red: #C62828;
+  --amber: #B26A00;
+  --green: #2E7D32;
+}
+
+/* ---- strip Streamlit chrome ---------------------------------------- */
+
+#MainMenu, footer, [data-testid="stStatusWidget"] { visibility: hidden; }
+
+[data-testid="stHeader"] { background: transparent; height: 0; }
+
+[data-testid="stMain"] .block-container {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+  max-width: 1420px;
+}
+
+/* ---- typography ----------------------------------------------------- */
+
+html, body, [data-testid="stAppViewContainer"] {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-size: 1.5rem !important; font-weight: 650 !important;
+     letter-spacing: -0.01em; margin-bottom: 0.1rem !important; }
+h2 { font-size: 1.1rem  !important; font-weight: 620 !important; }
+h3 { font-size: 0.98rem !important; font-weight: 600 !important; }
+
+h4, h5 {
+  font-size: 0.74rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+}
+
+[data-testid="stMetricValue"], [data-testid="stMetricDelta"],
+.mono, code, pre, table td, table th {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ---- sidebar -------------------------------------------------------- */
+
+[data-testid="stSidebar"] {
+  background: var(--panel);
+  border-right: 1px solid var(--edge);
+}
+
+[data-testid="stSidebar"] h1 {
+  font-size: 0.74rem !important;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stExpander"] details {
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+}
+
+/* ---- dropdowns: selectable, not typeable ---------------------------- */
+/* Streamlit selectboxes accept free text, which invites typing a value that is
+   not in the list and then wondering why nothing happened. The lists here are
+   short and fixed, so the input is made click-only: pointer-events:none lets
+   the click fall through to the wrapper, which still opens the menu.
+   NOTE: this project targets data-testid only. Streamlit 1.61 removed the
+   data-baseweb attributes entirely, so selectors using them match nothing. */
+
+[data-testid="stSelectbox"] input,
+[data-testid="stMultiSelect"] input {
+  pointer-events: none !important;
+  caret-color: transparent !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+[data-testid="stSelectbox"] > div { cursor: pointer; }
+
+/* ---- tabs ----------------------------------------------------------- */
+
+[data-testid="stTabs"] [role="tablist"] {
+  gap: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--edge);
+  padding: 0;
+}
+
+[data-testid="stTab"], [role="tab"] {
+  height: 40px;
+  padding: 0 18px;
+  color: var(--muted);
+  font-weight: 560;
+  font-size: 0.87rem;
+  background: transparent;
+}
+
+[data-testid="stTab"]:hover, [role="tab"]:hover { color: var(--text); }
+
+[data-testid="stTab"][aria-selected="true"],
+[role="tab"][aria-selected="true"] {
+  color: var(--text);
+  font-weight: 640;
+  box-shadow: inset 0 -2px 0 var(--green);
+}
+
+/* ---- train picker --------------------------------------------------- */
+
+.train-card {
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 10px 10px 6px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.train-card.on { border-color: var(--green); background: #F4F9F4; }
+.train-card svg { width: 100%; height: auto; display: block; }
+
+.train-name { font-size: 0.8rem; font-weight: 620; margin-top: 6px;
+              color: var(--text); }
+.train-meta { font-size: 0.68rem; color: var(--muted); }
+
+/* ---- metrics -------------------------------------------------------- */
+
+[data-testid="stMetric"] {
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+[data-testid="stMetricLabel"] p {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+}
+
+[data-testid="stMetricValue"] {
+  font-size: 1.4rem !important;
+  font-weight: 640 !important;
+  letter-spacing: -0.02em;
+  color: var(--text) !important;
+}
+
+[data-testid="stMetricDelta"] { font-size: 0.72rem !important; }
+
+/* ---- panels, tables, alerts ----------------------------------------- */
+
+[data-testid="stExpander"] details {
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+}
+
+[data-testid="stTable"] table { font-size: 0.84rem; border-radius: 8px;
+                                overflow: hidden; }
+
+[data-testid="stTable"] thead th {
+  background: var(--panel) !important;
+  color: var(--muted) !important;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--edge) !important;
+}
+
+[data-testid="stTable"] tbody td {
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--edge) !important;
+}
+
+[data-testid="stAlert"] { border-radius: 8px; }
+
+hr { border-color: var(--edge) !important; }
+
+/* Keep the Plotly toolbar visible rather than hover-only, so "reset zoom" is
+   always findable. */
+.modebar { opacity: 0.75 !important; }
+.modebar:hover { opacity: 1 !important; }
+
+/* ---- departure board ------------------------------------------------ */
+
+.board {
+  background: var(--bg);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 78px 68px 1fr 96px 124px;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--edge);
+}
+
+.board-row:last-child { border-bottom: none; }
+.board-row:nth-child(even) { background: #FCFDFD; }
+
+.board-row.head {
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+}
+
+.board-time {
+  font-size: 1.16rem;
+  font-weight: 660;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-in { font-size: 0.88rem; font-weight: 620; color: var(--muted);
+            font-variant-numeric: tabular-nums; }
+.board-in.soon { color: var(--amber); }
+
+.board-dest { font-size: 0.92rem; font-weight: 540; }
+.board-sub  { font-size: 0.73rem; color: var(--muted); }
+
+.board-load {
+  font-size: 0.7rem;
+  font-weight: 620;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.load-easy  { background: #EDF7ED; color: #2E7D32; border-color: #CFE8D0; }
+.load-mid   { background: #FDF4E3; color: #B26A00; border-color: #F0DFBC; }
+.load-heavy { background: #FDECEC; color: #C62828; border-color: #F5CFCF; }
+
+.jt-likely { font-size: 0.92rem; font-weight: 620; color: var(--text); }
+.jt-phys   { font-size: 0.71rem; color: var(--muted); }
